@@ -1,0 +1,20 @@
+{
+    "name": "Thực Vật Bạch Mã",
+    "short_name": "ThucVatBM",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2E7D32",
+    "theme_color": "#2E7D32",
+    "icons": [
+        {
+            "src": "static/icons/logo-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "static/icons/logo-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+:root { --gap: 12px; --green: #2e7d32; --green2:#388e3c; --yellow:#ffeb3b; }
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; color: #111; background:#f7faf7;}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px 20px; }
+header.site-header { background: var(--green); color: #fff; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0; }
+.header-title { margin: 0; text-align: center; color: var(--yellow); animation: fadeIn 700ms ease-in both; }
+.header-title small { color: #fff; opacity: .9; }
+.brand-img { height: 60px; border-radius: 6px; transition: filter .25s ease, transform .25s ease; }
+.brand-img:hover { filter: brightness(1.12); transform: translateY(-1px); }
+nav a { color: #eaffef; text-decoration: none; margin-right: 12px; }
+nav a:hover { text-decoration: underline; }
+.main { padding-top: 6px; }
+table { width: 100%; border-collapse: collapse; background:#fff; border-radius: 10px; overflow:hidden; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+th, td { border-bottom: 1px solid #eee; padding: 10px; vertical-align: middle; }
+th { text-align: left; background: #f3fbf3; }
+img.thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; }
+.btn { display: inline-block; padding: 8px 12px; border-radius: 8px; border: 1px solid #ddd; background: #fff; cursor: pointer;}
+.btn.primary { background: var(--green); color: #fff; border-color: var(--green); }
+.btn.warn { background: #b00020; color: #fff; border-color: #b00020; }
+input[type=text], textarea, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; background:#fff; }
+form.grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+form.grid .full { grid-column: 1 / -1; }
+.searchbar { display: flex; gap: var(--gap); margin: 12px 0; }
+.flash { padding: 10px 12px; border-radius: 8px; background:#f3f7ff; border:1px solid #cfe0ff; margin-bottom:12px; }
+
+footer.site-footer { background: var(--green2); color: #fff; margin-top: 24px; padding: 14px 0; }
+.footer-inner { display:flex; align-items:center; gap:10px; justify-content: space-between; }
+.footer-brand { height: 36px; border-radius: 6px; }
+
+@media (max-width: 760px) {
+  .header-inner { flex-direction: row; }
+  .brand-img { height: 46px; }
+  .searchbar { flex-direction: column; }
+  form.grid { grid-template-columns: 1fr; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

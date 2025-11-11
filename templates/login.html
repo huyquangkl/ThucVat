@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Đăng nhập quản trị{% endblock %}
+{% block content %}
+<h3>Đăng nhập</h3>
+<form method="post" style="max-width:360px; display:grid; gap:12px;">
+  <div>
+    <label>Tên đăng nhập</label>
+    <input type="text" name="username" required/>
+  </div>
+  <div>
+    <label>Mật khẩu</label>
+    <input type="password" name="password" required/>
+  </div>
+  <button class="btn primary" type="submit">Đăng nhập</button>
+</form>
+{% endblock %}

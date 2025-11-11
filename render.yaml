@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: danhmuc-bachma-v3
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: ThucvatBM
+      - key: ADMIN_PASSWORD
+        value: Bachma123
+      - key: DATABASE_URL
+        value: sqlite:///data.db
+staticPublishPath: static

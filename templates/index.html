@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Danh sách loài – VQG Bạch Mã{% endblock %}
+{% block content %}
+
+<form class="searchbar" method="get" action="{{ url_for('index') }}">
+  <select name="field">
+    <option value="common_name" {{ 'selected' if request.args.get('field')=='common_name' else '' }}>Tìm theo: Tên thường gọi</option>
+    <option value="scientific_name" {{ 'selected' if request.args.get('field')=='scientific_name' else '' }}>Tìm theo: Tên khoa học</option>
+    <option value="family" {{ 'selected' if request.args.get('field')=='family' else '' }}>Tìm theo: Họ</option>
+  </select>
+  <input type="text" name="q" placeholder="Nhập từ khóa..." value="{{ request.args.get('q', '') }}"/>
+  <button class="btn" type="submit">🔍 Tìm kiếm</button>
+  {% if current_user.is_authenticated %}
+  <a class="btn primary" href="{{ url_for('add_species') }}">➕ Thêm loài</a>
+  {% endif %}
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hình</th>
+      <th>Tên Việt Nam</th>
+      <th>Tên khoa học</th>
+      <th>Họ</th>
+      <th>Vị trí</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sp in species %}
+    <tr>
+      <td>{% if sp.image_path %}<img class="thumb" src="{{ url_for('uploaded_file', filename=sp.image_path) }}"/>{% endif %}</td>
+      <td>{{ sp.common_name }}</td>
+      <td><em>{{ sp.scientific_name }}</em></td>
+      <td>{{ sp.family }}</td>
+      <td>{{ sp.location }}</td>
+      <td>
+        <a class="btn" href="{{ url_for('detail_species', species_id=sp.id) }}">Xem</a>
+        {% if current_user.is_authenticated %}
+        <a class="btn" href="{{ url_for('edit_species', species_id=sp.id) }}">Sửa</a>
+        <form style="display:inline" method="post" action="{{ url_for('delete_species', species_id=sp.id) }}" onsubmit="return confirm('Xóa loài này?');">
+          <button class="btn warn" type="submit">Xóa</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">Chưa có dữ liệu. Hãy thêm loài mới.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

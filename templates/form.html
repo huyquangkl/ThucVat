@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Sửa' if species else 'Thêm' }} loài – VQG Bạch Mã{% endblock %}
+{% block content %}
+<h3 style="margin-top:0">{{ 'Sửa' if species else 'Thêm' }} loài</h3>
+<form class="grid" method="post" enctype="multipart/form-data">
+  <div>
+    <label>Tên thường gọi / Tên Việt Nam *</label>
+    <input type="text" name="common_name" value="{{ species.common_name if species else '' }}" required/>
+  </div>
+  <div>
+    <label>Tên khoa học *</label>
+    <input type="text" name="scientific_name" value="{{ species.scientific_name if species else '' }}" required/>
+  </div>
+  <div>
+    <label>Họ *</label>
+    <input type="text" name="family" value="{{ species.family if species else '' }}" required/>
+  </div>
+  <div>
+    <label>Chi</label>
+    <input type="text" name="genus" value="{{ species.genus if species else '' }}"/>
+  </div>
+  <div>
+    <label>Vị trí</label>
+    <input type="text" name="location" value="{{ species.location if species else '' }}"/>
+  </div>
+  <div>
+    <label>Trạng thái</label>
+    <input type="text" name="status" value="{{ species.status if species else '' }}"/>
+  </div>
+  <div class="full">
+    <label>Mô tả</label>
+    <textarea name="description" rows="4">{{ species.description if species else '' }}</textarea>
+  </div>
+  <div class="full">
+    <label>Hình ảnh (jpg/png)</label>
+    <input type="file" name="image"/>
+    {% if species and species.image_path %}
+      <div style="margin-top:8px">
+        <img class="thumb" src="{{ url_for('uploaded_file', filename=species.image_path) }}"/>
+      </div>
+    {% endif %}
+  </div>
+  <div class="full">
+    <button class="btn primary" type="submit">Lưu</button>
+    <a class="btn" href="{{ url_for('index') }}">Hủy</a>
+  </div>
+</form>
+{% endblock %}

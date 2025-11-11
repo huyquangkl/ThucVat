@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}Danh mục thực vật - VQG Bạch Mã{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <img class="brand-img" src="{{ url_for('static', filename='images/logo Vườn.png') }}" alt="Logo Bạch Mã">
+      <div style="flex:1; text-align:center;">
+        <h2 class="header-title">Danh mục các loài thực vật – Vườn Quốc Gia Bạch Mã</h2>
+        <nav>
+          <a href="{{ url_for('index') }}">Danh sách loài</a>
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('add_species') }}">Thêm loài mới</a>
+            <a href="{{ url_for('export_csv') }}">Xuất CSV</a>
+            <a href="{{ url_for('logout') }}">Đăng xuất ({{ current_user.username }})</a>
+          {% else %}
+            <a href="{{ url_for('export_csv') }}">Xuất CSV</a>
+            <a href="{{ url_for('login') }}">Đăng nhập</a>
+          {% endif %}
+        </nav>
+      </div>
+      <img class="brand-img" src="{{ url_for('static', filename='images/logo Vườn2.jpg') }}" alt="Cổng vào Bạch Mã">
+    </div>
+  </header>
+
+  <main class="container main">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© {{ 2025 }} VQG Bạch Mã – Ứng dụng demo.</div>
+      <img class="footer-brand" src="{{ url_for('static', filename='images/logo Vườn.png') }}" alt="Logo Bạch Mã nhỏ">
+    </div>
+  </footer>
+</body>
+</html>

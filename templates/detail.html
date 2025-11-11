@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Chi tiết loài – VQG Bạch Mã{% endblock %}
+{% block content %}
+<h3 style="margin-top:0">{{ species.common_name }} <small><em>{{ species.scientific_name }}</em></small></h3>
+<div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap">
+  {% if species.image_path %}
+  <img class="thumb" style="width:220px; height:220px;" src="{{ url_for('uploaded_file', filename=species.image_path) }}"/>
+  {% endif %}
+  <div style="min-width:260px">
+    <p><strong>Họ:</strong> {{ species.family }}</p>
+    <p><strong>Chi:</strong> {{ species.genus }}</p>
+    <p><strong>Vị trí:</strong> {{ species.location }}</p>
+    <p><strong>Trạng thái:</strong> {{ species.status }}</p>
+  </div>
+</div>
+<div style="margin-top:12px">
+  <p><strong>Mô tả:</strong></p>
+  <p style="white-space:pre-wrap">{{ species.description }}</p>
+</div>
+<div style="margin-top:12px">
+  <a class="btn" href="{{ url_for('index') }}">← Quay lại</a>
+  {% if current_user.is_authenticated %}
+  <a class="btn primary" href="{{ url_for('edit_species', species_id=species.id) }}">Sửa</a>
+  {% endif %}
+</div>
+{% endblock %}
